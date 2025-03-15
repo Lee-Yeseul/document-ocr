@@ -9,7 +9,9 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({ ...extracted }, { status: 200 });
   } catch (error) {
-    console.log(error);
-    return NextResponse.json({}, { status: 400 });
+    return NextResponse.json(
+      { message: JSON.stringify(error) },
+      { status: 400 }
+    );
   }
 }

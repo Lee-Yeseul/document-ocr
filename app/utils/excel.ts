@@ -13,5 +13,5 @@ export function createExcel(data: DataObject[]) {
   const wb = XLSX.utils.book_new();
   XLSX.utils.book_append_sheet(wb, ws, "Sheet1");
 
-  XLSX.writeFile(wb, "data.xlsx");
+  XLSX.writeFile(wb, "Extracted_Keywords.xlsx");
 }

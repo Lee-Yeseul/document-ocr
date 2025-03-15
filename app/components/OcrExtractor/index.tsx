@@ -25,9 +25,10 @@ export default function OcrExtractor({ setResult }: Props) {
 
       const result = await response.json();
       setResult(result.text);
-      setOcrLoading(false);
     } catch (e) {
       console.log("this is error", e);
+    } finally {
+      setOcrLoading(false);
     }
   };
   return (

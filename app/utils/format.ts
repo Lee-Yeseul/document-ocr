@@ -45,7 +45,7 @@ function formatDate(dateString: string): string {
 
   const [monthName, day, year] = dateString.split(" ");
   const month = months[monthName.toUpperCase()];
-  const formattedDate = `${year}.${month}.${parseInt(day)}`;
+  const formattedDate = `${year}${month}${parseInt(day)}`;
 
   return formattedDate;
 }

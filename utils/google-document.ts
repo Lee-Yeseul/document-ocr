@@ -1,12 +1,9 @@
-import * as fs from "fs";
-
 import { GoogleAuth } from "google-auth-library";
 import { DocumentProcessorServiceClient } from "@google-cloud/documentai";
-import { extractFields } from "@/utils";
 
-export const documentAI = async (filePath: string) => {
-  const fileBuffer = fs.readFileSync(filePath);
-  const encodedImage = fileBuffer.toString("base64");
+export const pdfToText = async (file: File) => {
+  const fileBuffer = Buffer.from(await file.arrayBuffer());
+  const encodedFile = fileBuffer.toString("base64");
 
   const auth = new GoogleAuth({
     keyFilename: "service-account.json",
@@ -15,12 +12,13 @@ export const documentAI = async (filePath: string) => {
 
   const client = new DocumentProcessorServiceClient({ auth });
 
-  const name = "projects/877110188756/locations/us/processors/6697facbb397ef7c";
+  const processor =
+    "projects/877110188756/locations/us/processors/6697facbb397ef7c";
 
   const test = {
-    name,
+    name: processor,
     rawDocument: {
-      content: encodedImage,
+      content: encodedFile,
       mimeType: "application/pdf",
     },
   };
@@ -36,7 +34,5 @@ export const documentAI = async (filePath: string) => {
     throw new Error("Document text extraction failed.");
   }
 
-  const extracted = extractFields(text);
-
-  return extracted;
+  return text;
 };

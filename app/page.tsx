@@ -1,6 +1,4 @@
 "use client";
-import { createExcel } from "@/utils/excel";
-import { mock } from "@/utils/mock";
 import { useState } from "react";
 
 export default function Home() {
@@ -31,17 +29,8 @@ export default function Home() {
     }
   };
 
-  const handleDownload = async () => {
-    try {
-      createExcel(mock, "./test.xlsx");
-    } catch (e) {
-      console.log("this is error", e);
-    }
-  };
-
   return (
     <div style={{ textAlign: "center", marginTop: "50px" }}>
-      <h1>PDF OCR 테스트</h1>
       <input
         type="file"
         onChange={handleFileChange}
@@ -50,8 +39,6 @@ export default function Home() {
       <button onClick={handleUpload} style={{ marginLeft: "10px" }}>
         OCR 실행
       </button>
-
-      <button onClick={handleDownload}>엑셀 다운로드</button>
 
       {ocrResult && (
         <div style={{ marginTop: "20px" }}>

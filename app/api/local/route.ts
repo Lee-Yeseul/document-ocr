@@ -1,15 +1,19 @@
-import { NextResponse } from "next/server";
-import { documentAI } from "@/utils/document";
+import { NextRequest, NextResponse } from "next/server";
+import { pdfToText } from "@/utils/google-document";
 
-export async function POST() {
-  // 파일 경로
-  const response = [];
+export async function POST(request: NextRequest) {
+  const formData = await request.formData();
+  const pdf = formData.get("pdf");
 
-  for (let i = 200; i < 202; i++) {
-    const filePath = `public/test/CO ID795-페이지-${i}.pdf`;
-    const result = await documentAI(filePath);
-    response.push({ ...result, fileName: filePath });
+  if (!pdf || !(pdf instanceof File)) {
+    console.error("유효한 PDF 파일이 아닙니다.");
+    return NextResponse.json(
+      { message: "유효한 PDF 파일이 아닙니다." },
+      { status: 400 }
+    );
   }
 
-  return NextResponse.json({ text: response }, { status: 200 });
+  const result = await pdfToText(pdf);
+
+  return NextResponse.json({ text: result }, { status: 200 });
 }

@@ -1,8 +1,9 @@
 export function extractFields(inputText: string) {
   const result: { [key: string]: string } = {};
 
-  const referenceNoRegex = /Reference No\.:([A-Za-z0-9\/\-]+)/;
+  const referenceNoRegex = /Reference No\.\s*(\S+)/;
   const referenceNoMatch = inputText.match(referenceNoRegex);
+  console.log(referenceNoMatch);
   if (referenceNoMatch) {
     result["referenceNo"] = removeReferenceNo(referenceNoMatch[0].trim());
   }
@@ -19,6 +20,8 @@ export function extractFields(inputText: string) {
   if (certificationMatch) {
     result["date"] = formatDate(certificationMatch[1].trim());
   }
+
+  console.log("this is result", result);
 
   return result;
 }

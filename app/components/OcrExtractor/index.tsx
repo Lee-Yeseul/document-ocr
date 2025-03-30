@@ -27,6 +27,8 @@ export default function OcrExtractor({ setResult }: Props) {
       setResult(result.text);
     } catch (e) {
       console.log("this is error", e);
+      setOcrLoading(false);
+      alert(JSON.stringify(e));
     } finally {
       setOcrLoading(false);
     }

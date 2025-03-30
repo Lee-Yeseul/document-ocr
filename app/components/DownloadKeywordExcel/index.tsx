@@ -5,7 +5,7 @@ interface Props {
 }
 export default function DownloadKeywordExcel({ ocrResult }: Props) {
   const handleDownloadKeywordExcel = async () => {
-    const splitedText = ocrResult.split("\n1.");
+    const splitedText = ocrResult.split("CERTIFICATE OF ORIGIN");
     const result = [];
 
     for (const pageText of splitedText) {
@@ -15,6 +15,7 @@ export default function DownloadKeywordExcel({ ocrResult }: Props) {
       });
 
       const data = await response.json();
+      console.log(data);
       result.push(data);
     }
 

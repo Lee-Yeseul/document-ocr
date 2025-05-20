@@ -5,7 +5,7 @@ export function extractFields(inputText: string) {
   const referenceNoMatch = inputText.match(referenceNoRegex);
   console.log(referenceNoMatch);
   if (referenceNoMatch) {
-    result["referenceNo"] = removeReferenceNo(referenceNoMatch[0].trim());
+    result["referenceNo"] = referenceNoMatch[1];
   }
 
   const gwRegex = /GW:\s*([\d\.]+)\s*KGM/;
@@ -24,10 +24,6 @@ export function extractFields(inputText: string) {
   console.log("this is result", result);
 
   return result;
-}
-
-function removeReferenceNo(text: string): string {
-  return text.replace(/Reference No\.:/, "").trim();
 }
 
 function formatDate(dateString: string): string {

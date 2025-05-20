@@ -2,12 +2,12 @@ interface Props {
   ocrResult: string;
 }
 export default function OcrResult({ ocrResult }: Props) {
-  const splitedText = ocrResult.split("CERTIFICATE OF ORIGIN");
+  const splitText = ocrResult.split("CERTIFICATE OF ORIGIN");
   return (
     <div className="p-10 flex flex-col gap-2">
       <h2 className="text-rose-500">페이지별 추출된 텍스트 확인</h2>
 
-      {splitedText.map((text, index) => {
+      {splitText.map((text, index) => {
         return (
           <div
             key={index}

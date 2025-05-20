@@ -5,10 +5,10 @@ interface Props {
 }
 export default function DownloadKeywordExcel({ ocrResult }: Props) {
   const handleDownloadKeywordExcel = async () => {
-    const splitedText = ocrResult.split("CERTIFICATE OF ORIGIN");
+    const splitText = ocrResult.split("CERTIFICATE OF ORIGIN");
     const result = [];
 
-    for (const pageText of splitedText) {
+    for (const pageText of splitText) {
       const response = await fetch("/api/extract-keyword", {
         method: "POST",
         body: JSON.stringify(pageText),
